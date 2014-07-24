@@ -30,5 +30,9 @@ class Module:
             if '__pycache__' in module_name or not os.path.isdir(dir_path):
                 continue
 
+            if not os.path.isdir('%s.git'  % dir_path):
+                Log.debug('Not git repository: %s' % dir_path)
+                continue
+
             self.__print_pending_change(module_name)
 
