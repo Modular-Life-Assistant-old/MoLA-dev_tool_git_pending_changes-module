@@ -1,11 +1,12 @@
 from core import Daemon
 from core import Log
 
+from circuits import Component
 import os
 import subprocess
 
-class Module:
-    def start(self):
+class Module(Component):
+    def started(self, component):
         self.__print_pending_change()
         self.__scan_modules()
 
