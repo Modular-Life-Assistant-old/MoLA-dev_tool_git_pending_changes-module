@@ -14,7 +14,7 @@ class Module(Component):
         path = Daemon.ROOT_PATH
 
         if module_name:
-            path = '%smodules/%s/' % (path, module_name)
+            path = os.path.join(path, 'modules', module_name)
 
         result = subprocess.getoutput('cd "%s" && git status' % path)
 
