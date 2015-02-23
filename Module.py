@@ -1,9 +1,10 @@
-from core import Daemon
 from core import Log
+from core.settings import MODULES_PATH, ROOT_PATH
 
 from circuits import Component
 import os
 import subprocess
+
 
 class Module(Component):
     def started(self, component):
@@ -11,7 +12,7 @@ class Module(Component):
         self.__scan_modules()
 
     def __print_pending_change(self, module_name=''):
-        path = Daemon.ROOT_PATH
+        path = ROOT_PATH
 
         if module_name:
             path = os.path.join(path, 'modules', module_name)
@@ -23,10 +24,10 @@ class Module(Component):
             Log.debug('change in %s: %s' % (type, result))
 
     def __scan_modules(self):
-        dir_list = sorted(os.listdir(Daemon.MODULES_PATH))
+        dir_list = sorted(os.listdir(MODULES_PATH))
 
         for module_name in dir_list:
-            dir_path = os.path.join(Daemon.MODULES_PATH, module_name)
+            dir_path = os.path.join(MODULES_PATH, module_name)
 
             if '__pycache__' in module_name or not os.path.isdir(dir_path):
                 continue
